@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+.k-tabstrip-items {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(80px,200px);
+}
+
+.k-item {
+  border: solid 1px grey;
+}
+
+.k-tabstrip {
+  width: 1200px;
+}

@@ -9,12 +9,17 @@ import TabStripTab from './components/tabstrip/TabStripTab';
 import TabIndex from './components/TabContent';
 import  TabStrip  from './components/tabstrip/TabStrip';
 
+import {guid} from './components/tabstrip/util';
+
+import './App.css'
 const tabs = [
-  { id:11,title: 'Paris', content: <TabIndex id={11}/>,disabled:false },
-  { id:22,title: 'New York City', content: <TabIndex id={22}/> ,disabled:false},
-  { id:33,title: 'Tallinn', content: <TabIndex id={33}/> ,disabled:true},
+  { id:1,title: 'Paris', content: <TabIndex id={11}/>,disabled:false },
+  { id:2,title: 'New York City', content: <TabIndex id={22}/> ,disabled:false},
+  { id:3,title: 'Tallinn', content: <TabIndex id={33}/> ,disabled:true},
 
 ];
+
+let index = 4;
 
 const Title = (props:any) => {
   return (
@@ -44,8 +49,22 @@ class App extends React.Component {
     this.setState({ tabs: newTabs });
   };
 
+  handleOnClick = (event:any) => {
+    const id = index++;
+    const newTab = {
+      id,
+      title: ` Title ${id}`,
+      content: <TabIndex id={id}/>,
+      disabled:false 
+    }
+    this.setState({tabs:[...this.state.tabs,newTab]})
+  }
+  
+
   render() {
     return (
+      <div>
+        <button onClick={this.handleOnClick}> Add Tab</button>
       <TabStrip selected={this.state.selected} onSelect={this.handleSelect} keepTabsMounted>
         {
           this.state.tabs.map((item, index) => {
@@ -57,6 +76,7 @@ class App extends React.Component {
           })
         }
       </TabStrip>
+        </div>
     )
   }
 }
