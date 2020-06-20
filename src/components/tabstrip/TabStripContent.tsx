@@ -24,7 +24,6 @@ const  TabStripContent:FunctionComponent<any> = (props)=>{
             React.Children.toArray(children)[selected] as any;
     console.log(selectedTab);
     
-    
     const contentClasses = classNames('k-content', 'k-state-active', selectedTab.props.contentClassName);
 
     

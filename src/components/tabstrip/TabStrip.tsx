@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, ReactElement } from 'react';
 import TabStripNavigation from "./TabStripNavigation";
 import TabStripContent from "./TabStripContent";
 import {Keys} from './util';
@@ -21,6 +21,7 @@ export interface TabStripProps {
     className?: string;
     keepTabsMounted?: boolean;
     onSelect?: (e: TabStripSelectEventArguments) => void;
+    children:ReactElement<any>[];
 }
 const  TabStrip:React.FunctionComponent<TabStripProps>=(props)=>{
     const [tabElement,setElement] = useState<HTMLDivElement | null>();
@@ -46,39 +47,39 @@ const  TabStrip:React.FunctionComponent<TabStripProps>=(props)=>{
         return null;
     };
     const firstNavigatableTab = () =>{
-        // if (children) {
-        //     for (var i = 0; i < length; i++) {
-        //         if (!children[i].props.disabled) {
-        //             return i;
-        //         }
-        //     }
-        // }
+        if (children) {
+            for (var i = 0; i < length; i++) {
+                if (!(children[i] as ReactElement<any>).props.disabled) {
+                    return i;
+                }
+            }
+        }
     };
     const  lastNavigatableTab = ()=> {
-        // var length = React.Children.count(children);
-        // if (children) {
-        //     for (var i = length - 1; i > 0; i--) {
-        //         if (!children[i].props.disabled) {
-        //             return i;
-        //         }
-        //     }
-        // }
+        var length = React.Children.count(children);
+        if (children) {
+            for (var i = length - 1; i > 0; i--) {
+                if (!(children[i] as ReactElement<any>).props.disabled) {
+                    return i;
+                }
+            }
+        }
     };
     const prevNavigatableTab = function () {
         var index = selected ? selected - 1 : -1;
         if (index < 0) {
             return lastNavigatableTab();
         }
-        // if (children) {
-        //     for (var i = index; i > -1; i--) {
-        //         if (!children[i].props.disabled) {
-        //             return i;
-        //         }
-        //         if (i === 0) {
-        //             return lastNavigatableTab();
-        //         }
-        //     }
-        // }
+        if (children) {
+            for (var i = index; i > -1; i--) {
+                if (!(children[i] as ReactElement<any>).props .disabled) {
+                    return i;
+                }
+                if (i === 0) {
+                    return lastNavigatableTab();
+                }
+            }
+        }
     };
 
     const  nextNavigatableTab = function () {
@@ -89,16 +90,16 @@ const  TabStrip:React.FunctionComponent<TabStripProps>=(props)=>{
         if (index >= childrenCount) {
             return  firstNavigatableTab();
         }
-        // if (children) {
-        //     for (var i = index; i < childrenCount; i++) {
-        //         if (!children[i].props.disabled) {
-        //             return i;
-        //         }
-        //         if (i + 1 === childrenCount) {
-        //             return  firstNavigatableTab();
-        //         }
-        //     }
-        // }
+        if (children) {
+            for (var i = index; i < childrenCount; i++) {
+                if (!(children[i]as ReactElement<any>).props.disabled) {
+                    return i;
+                }
+                if (i + 1 === childrenCount) {
+                    return  firstNavigatableTab();
+                }
+            }
+        }
     };
     const keyBinding = {
         [Keys.left]:()=> prevNavigatableTab(),
@@ -116,6 +117,7 @@ const  TabStrip:React.FunctionComponent<TabStripProps>=(props)=>{
     };
     
     const onKeyDown = function (event:any) {
+        debugger;
         let handler;
         switch (event.keyCode) {
             case Keys.left:
