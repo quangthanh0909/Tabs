@@ -37,17 +37,47 @@
   }
 }
 
+.dls-tabstrip-navigaion-wrapper {
+  position: relative;
+}
 
 .k-tabstrip-items {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(80px,200px);
+  grid-auto-columns: minmax(88px,200px);
+  overflow: hidden;
+  padding-left: 88px;
+  border: solid 1px red;
 }
-
+  
 .k-item {
-  border: solid 1px grey;
+  border: solid 1px red;
+
 }
 
 .k-tabstrip {
-  width: 1200px;
+  width: 100%;
+}
+
+.k-tabstrip-items li:first-child {
+  width: 86px;
+  position: absolute;
+  left: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-left {
+  left: 90px;
+  z-index: 1000;
+}
+
+.arrow-right {
+  right: 9px;
+  
+  z-index: 1000;
 }
