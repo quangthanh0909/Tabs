@@ -62,13 +62,15 @@
 .k-tabstrip-items li:first-child {
   width: 86px;
   position: absolute;
-  left: 0;
+  z-index: 1000;
 }
 
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .arrow-left {

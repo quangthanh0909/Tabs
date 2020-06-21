@@ -18,9 +18,14 @@ export interface TabStripNavigationProps {
 	onSelect?(idx: number): void;
 	children?: ReactElement<any>[];
 }
+interface ScrollParamsProps {
+    scrollLeft?:boolean;
+    scrollRight?:boolean;
+}
 const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationProps) => {
 	const [ tabElement, setTabElement ] = useState<HTMLUListElement | null>();
 	const [ showArrow, setShowError ] = useState(false);
+	const [ scrollParams, setScrollParams ] = useState<ScrollParamsProps>({});
 
 	const { selected, onSelect, onKeyDown, tabIndex, children } = props;
 	const childElements = React.Children.toArray(children) as ReactElement[];
@@ -28,6 +33,7 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
 	useEffect(
 		() => {
 			if (tabElement) {
+                handleMutationScroll();
 				if ((tabElement.clientWidth - 86) / elementCount < 88) {
 					setShowError(true);
 				} else {
@@ -48,16 +54,30 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
         tabElement?.scrollBy(88,0);
     }
 
+    const handleMutationScroll = () => {
+        const {clientWidth,scrollWidth,scrollLeft} = tabElement as HTMLUListElement;
+        const firstElement = document.querySelector('.k-tabstrip-items li:first-child') as HTMLElement;
+        firstElement.style.left = scrollLeft+"px";
+        
+        setScrollParams({scrollLeft:scrollLeft>0,scrollRight:scrollWidth>clientWidth+scrollLeft});
+    }
+    
+    const handleOnScroll = () => {
+        handleMutationScroll();
+    }
+    
+
 	return (
             <div className="dls-tabstrip-navigaion-wrapper">
-                {showArrow && <div className="arrow arrow-left" onClick={handleLeftMove}>Arrow Left</div>}
+                {scrollParams.scrollLeft && <div className="arrow arrow-left" onClick={handleLeftMove}>Arrow Left</div>}
 
 			<ul
 				className="k-tabstrip-items k-reset"
 				role="tablist"
 				tabIndex={tabIndex}
 				onKeyDown={onKeyDown}
-				ref={setTabElement}
+                ref={setTabElement}
+                onScroll={handleOnScroll}
 			>
 				{elementCount &&
 					childElements.map((child, index) => {
@@ -71,7 +91,7 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
 						return <TabStripNavigationItem key={child.key ? child.key : undefined} {...tabProps} />;
 					})}
 			</ul>
-                {showArrow && <div className="arrow arrow-right" onClick={handleRightMove}>Arrow Right</div >}
+                {scrollParams.scrollRight && <div className="arrow arrow-right" onClick={handleRightMove}>Arrow Right</div >}
             </div>
 	);
 };
