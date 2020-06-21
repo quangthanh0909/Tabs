@@ -38,7 +38,7 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
                     setShowError(true)
                 }
                 else {
-                    setShowError(false)
+                    showArrow && setShowError(false)
                 }
 
 			
@@ -70,7 +70,7 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
 
 	return (
             <div className="dls-tabstrip-navigaion-wrapper">
-                {scrollParams.scrollLeft && <div className="arrow arrow-left" onClick={handleLeftMove}>Arrow Left</div>}
+                {showArrow && scrollParams.scrollLeft && <div className="arrow arrow-left" onClick={handleLeftMove}>Arrow Left</div>}
 
 			<ul
 				className="k-tabstrip-items k-reset"
@@ -92,7 +92,7 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
 						return <TabStripNavigationItem key={child.key ? child.key : undefined} {...tabProps} />;
 					})}
 			</ul>
-                {scrollParams.scrollRight && <div className="arrow arrow-right" onClick={handleRightMove}>Arrow Right</div >}
+                {showArrow && scrollParams.scrollRight && <div className="arrow arrow-right" onClick={handleRightMove}>Arrow Right</div >}
             </div>
 	);
 };
