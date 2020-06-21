@@ -32,14 +32,16 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
 	const elementCount = childElements.length;
 	useEffect(
 		() => {
-			if (tabElement) {
-                handleMutationScroll();
+            if(!tabElement) return;
+            if(showArrow) handleMutationScroll();
 				if ((tabElement.clientWidth - 86) / elementCount < 88) {
-					setShowError(true);
-				} else {
-					if (showArrow) setShowError(false);
-				}
-			}
+                    setShowError(true)
+                }
+                else {
+                    setShowError(false)
+                }
+
+			
 		},
 		[ elementCount ]
     );
@@ -58,7 +60,6 @@ const TabStripNavigation: FunctionComponent<any> = (props: TabStripNavigationPro
         const {clientWidth,scrollWidth,scrollLeft} = tabElement as HTMLUListElement;
         const firstElement = document.querySelector('.k-tabstrip-items li:first-child') as HTMLElement;
         firstElement.style.left = scrollLeft+"px";
-        
         setScrollParams({scrollLeft:scrollLeft>0,scrollRight:scrollWidth>clientWidth+scrollLeft});
     }
     

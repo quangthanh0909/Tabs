@@ -71,6 +71,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   z-index: 1000;
+  background-color: indigo;
 }
 
 .arrow-left {
