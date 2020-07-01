@@ -26,13 +26,13 @@ const  TabStripNavigationItem:FunctionComponent<TabStripNavigationItemProps> = (
             'role': 'tab',
             onClick: !disabled ? onClick : undefined
         };
-        const itemClasses = classNames('k-item',{'k-state-default': !(disabled || active)},
-            {'k-state-disabled': disabled},
-             {'k-state-active' : active},{'k-tab-on-top': active});
+        const itemClasses = classNames('dls-item',{'dls-state-default': !(disabled || active)},
+            {'dls-state-disabled': disabled},
+             {'dls-state-active' : active},{'dls-tab-on-top': active});
 
     return(
         <li {...itemProps} className={itemClasses}>
-            <span className="k-link">{title}</span>
+            <span className="dls-link">{title}</span>
         </li>
     )
 }

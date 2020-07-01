@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactChildren, ReactElement, useMemo } from 'react';
 import classNames from 'classnames';
-import {guid} from './util';
+import {guid} from '../util';
 
 
 

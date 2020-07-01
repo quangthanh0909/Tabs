@@ -5,17 +5,20 @@ import '@progress/kendo-react-intl';
 import '@progress/kendo-react-dropdowns';
 import '@progress/kendo-theme-default/dist/all.css';
 
-import TabStripTab from './components/tabstrip/TabStripTab';
+// import TabStripTab from './components/tabstrip/TabStripTab';
 import TabIndex from './components/TabContent';
-import  TabStrip  from './components/tabstrip/TabStrip';
+// import  TabStrip  from './components/tabstrip/TabStrip';
 
-import {guid} from './components/tabstrip/util';
+import  TabStrip , {TabStripTab}  from './components/kendo';
+
+
+import {guid} from './components/util';
 
 import './App.css'
 const tabs = [
-  { id:1,title: 'Home', content: <TabIndex id={11}/>,disabled:true },
-  { id:2,title: 'Title 1', content: <TabIndex id={22}/> ,disabled:false},
-  { id:3,title: 'Title 2', content: <TabIndex id={33}/> ,disabled:false},
+  { id:11,title: 'Home', content: <TabIndex id={11}/>,disabled:true },
+  { id:22,title: 'Title 1', content: <TabIndex id={22}/> ,disabled:false},
+  { id:33,title: 'Title 2', content: <TabIndex id={33}/> ,disabled:false},
 
 ];
 

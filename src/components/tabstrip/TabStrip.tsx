@@ -1,7 +1,7 @@
 import React, {useState, ReactElement } from 'react';
 import TabStripNavigation from "./TabStripNavigation";
 import TabStripContent from "./TabStripContent";
-import {Keys} from './util';
+import {Keys} from '../util';
 import classNames from 'classnames';
 
 export interface TabStripSelectEventArguments {
